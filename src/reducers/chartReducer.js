@@ -20,8 +20,6 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, branchs:payload };
     case types.salesloading:   
     return { ...state, sales : payload } 
-   
-    
     default:
       return state;
   }

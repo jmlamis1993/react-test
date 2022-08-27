@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+canvas[role="img"]{
+  margin-top: -20px;
+  height: 450px !important;
+}
+.select-prop{
+  width: 100%  
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

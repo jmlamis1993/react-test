@@ -3,7 +3,8 @@ export const types = {
     branchloading:'[chart] branch loading',
     categoryloading:'[chart] category loading',
     salesloading:'[chart] sales loading',
-    categorySetActive: '[chart] category Set Active',
-    productSetActive: '[chart] category Set Active',
-    branchSetActive: '[chart] category Set Active',
+    clearCategorys: '[chart] clear Categorys',
+    clearProduct: '[chart] product clear',
+  
+
 }

@@ -16,7 +16,7 @@ export const Navbar = () => {
           Menu
         </Typography>
       </Grid> 
-      <Grid item xs={6}>
+      <Grid item xs={6}  sx={{textAlign:'left !important'}}>
       <Typography variant="h6" color="inherit" component="div">
           User Name
         </Typography>

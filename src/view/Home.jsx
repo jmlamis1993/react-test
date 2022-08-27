@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 
-import { Grid } from "@mui/material/";
+import { Grid , Typography} from "@mui/material/";
 import Select from "react-select";
 import {
   Chart as ChartJS,
@@ -23,27 +23,21 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const labels = ["January", "February", "March", "April"];
+const labels = ["January", "February", "March", "April","May","June","July","Augost","September","Octuber","November","December"];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 2",
-      data: labels.map(() => 300),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
+
 export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "top",
+      position: "bottom",
     },
     title: {
       display: true,
-      text: "Chart.js Bar Chart",
+      text: "Sales by Month for",
+      font: {
+        size: 24
+    }
     },
   },
 };
@@ -56,6 +50,8 @@ export const Home = () => {
   const { categorys,products,branchs,sales } = useSelector((state) => state.chart);
   useEffect(() => {
     dispatch(categoryStartLoading());
+    dispatch(salesStartLoading())
+
   }, []);
   const listCat = categorys.map((item) => ({
     value: item.id,
@@ -74,33 +70,39 @@ export const Home = () => {
     labels,
     datasets: [
       {
-        label: "Dataset 2",
-        data: sales,
+        label: "Ventas",
+        data: sales.precio,
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
     ],
   };
 
   const handleChangeCategory = (e) => {
+    setProduct(0);
+    setBranch(0);
     setCategory(e);
     dispatch(productStartLoading(e.value));
     dispatch(salesStartLoading(e.value))
   };
   const handleChangeProducts = (e) => {
+    setBranch(0);
     setProduct(e);
     dispatch(branchStartLoading(e.value));
     dispatch(salesStartLoading(category.value, e.value))
   };
   const handleChangeBranch = (e) => {
+   
     setBranch(e);
     dispatch(salesStartLoading(category.value, product.value, e.value))
    
   };
   return (
     <>
-      <Grid container sx={{ padding: "50px" }}>
-        <Grid item xs={4} sx={{ paddingRight: "8%", paddingLeft: "8%" }}>
+      <Grid container sx={{ padding: "20px", paddingBottom:'50px'}}>
+        <Grid item xs={4} sx={{ paddingRight: "8%", paddingLeft: "4%", display:'flex' }}>
+        <Typography sx={{fontSize:'20px', padding:'5px'}}>Category: </Typography>
           <Select
+            className="select-prop"
             inputId="category"
             TextFieldProps={{
               label: "category",
@@ -115,8 +117,10 @@ export const Home = () => {
             onChange={handleChangeCategory}
           />
         </Grid>
-        <Grid item xs={4} sx={{ paddingRight: "8%", paddingLeft: "8%" }}>
+        <Grid item xs={4} sx={{ paddingRight: "8%", paddingLeft: "4%", display:'flex' }}>
+        <Typography sx={{fontSize:'20px', padding:'5px'}}>Product: </Typography>
           <Select
+          className="select-prop"
             inputId="product"
             TextFieldProps={{
               label: "products",
@@ -131,8 +135,10 @@ export const Home = () => {
             onChange={handleChangeProducts}
           />
         </Grid>
-        <Grid item xs={4} sx={{ paddingRight: "8%", paddingLeft: "8%" }}>
+        <Grid item xs={4} sx={{ paddingRight: "8%", paddingLeft: "4%", display:'flex'  }}>
+        <Typography sx={{fontSize:'20px', padding:'5px'}}>Marca: </Typography>
           <Select
+          className="select-prop"
             inputId="branch"
             TextFieldProps={{
               label: "branch",
@@ -148,8 +154,7 @@ export const Home = () => {
           />
         </Grid>
       </Grid>
-
-      <Grid container>
+      <Grid container sx={{height:'100px !important'}} >
         <Bar options={options} data={data} />
       </Grid>
     </>

@@ -6,7 +6,7 @@ export const categoryStartLoading = () => {
     return async (dispatch) => {
       try {
         const response = await chartServices.ListCategorys();
-        if (response.status === 200) {          
+        if (response.status === 200) { 
           dispatch(categoryLoaded(response.data));
         }
       } catch (error) {
@@ -18,12 +18,12 @@ export const categoryStartLoading = () => {
     type: types.categoryloading,
     payload: data,
   });
-
+ 
   export const productStartLoading = (id) => {
     return async (dispatch) => {
       try {
         const response = await chartServices.ListProducts(id);
-        if (response.status === 200) {          
+        if (response.status === 200) {  
           dispatch(productLoaded(response.data));
         }
       } catch (error) {
@@ -56,6 +56,7 @@ export const categoryStartLoading = () => {
     return async (dispatch) => {
       try {
         const response = await chartServices.ListSales(idCat, idProd, idBranch);
+        console.log(response);
         if (response.status === 200) {   
           const data = prepereChart(response.data)       
           dispatch(salesLoaded(data));
